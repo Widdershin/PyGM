@@ -13,7 +13,6 @@ class PyGM(object):
 		self.objects = []
 
 	def update(self):
-		print 'Update loop is working!'
 		for obj in self.objects:
 			obj.update()
 
