@@ -23,18 +23,28 @@ class PyGM(object):
 
 class PyGMObj(object):
 	"""Generic PYGMObj"""
+	instances = []
+
 	def __init__(self, x, y, sprite=None):
 		super(PyGMObj, self).__init__()
 		self.create()
 		self.x = x
 		self.y = y
 		self.sprite = sprite
+		PyGMObj.instances.append(self)
 
-	def create():
+	def create(self):
 		pass
 
-	def update():
+	def update(self):
 		pass
 
-	def draw():
+	def draw(self):
 		pass
+
+	@classmethod
+	def getInstances(cls, instType=None):
+		"""Returns a list of all instances of type and children of type"""
+		if instType is None:
+			instType = cls
+		return [i for i in PyGMObj.instances if isinstance(i, instType)]
