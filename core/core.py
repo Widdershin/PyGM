@@ -1,16 +1,19 @@
 import pygame
+from sprite import Sprite
 
 
 class PyGM(object):
 	"""Main PyGM object, handles creating shit"""
+	objects = []
+	screen = None
+
 	def __init__(self, width=640, height=480, fps=60):
 		super(PyGM, self).__init__()
 		self.width = width
 		self.height = height
 		self.fps = fps
 		pygame.init()
-		self.screen = pygame.display.set_mode((self.width, self.height))
-		self.objects = []
+		PyGM.screen = pygame.display.set_mode((self.width, self.height))
 
 	def update(self):
 		for obj in self.objects:
@@ -19,6 +22,7 @@ class PyGM(object):
 	def draw(self):
 		for obj in self.objects:
 			obj.draw()
+		pygame.display.flip()
 
 
 class PyGMObj(object):
@@ -30,8 +34,8 @@ class PyGMObj(object):
 		self.create()
 		self.x = x
 		self.y = y
-		self.sprite = sprite
-		PyGMObj.instances.append(self)
+		self.sprite = Sprite(sprite, PyGM.screen)
+		PyGM.objects.append(self)
 
 	def create(self):
 		pass
@@ -40,11 +44,10 @@ class PyGMObj(object):
 		pass
 
 	def draw(self):
-		pass
+		if self.sprite is not None:
+			self.sprite.draw()
 
 	@classmethod
-	def getInstances(cls, instType=None):
+	def getInstances(cls):
 		"""Returns a list of all instances of type and children of type"""
-		if instType is None:
-			instType = cls
-		return [i for i in PyGMObj.instances if isinstance(i, instType)]
+		return [i for i in PyGM.objects if isinstance(i, cls)]
