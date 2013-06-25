@@ -9,7 +9,9 @@ class Character(core.PyGMObj):
 
 	def update(self):
 		super(Character, self).update()
-		print 'Character updating'
+		self.x += 1
+		self.y += 1
+		print 'updating'
 
 
 def main():

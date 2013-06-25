@@ -12,6 +12,7 @@ class PyGM(object):
 		self.width = width
 		self.height = height
 		self.fps = fps
+		self.clock = pygame.time.Clock()
 		pygame.init()
 		PyGM.screen = pygame.display.set_mode((self.width, self.height))
 
@@ -20,9 +21,11 @@ class PyGM(object):
 			obj.update()
 
 	def draw(self):
+		PyGM.screen.fill((0, 0, 0))
 		for obj in self.objects:
 			obj.draw()
 		pygame.display.flip()
+		self.clock.tick(self.fps)
 
 
 class PyGMObj(object):
@@ -45,7 +48,7 @@ class PyGMObj(object):
 
 	def draw(self):
 		if self.sprite is not None:
-			self.sprite.draw()
+			self.sprite.draw(self.x, self.y)
 
 	@classmethod
 	def getInstances(cls):
