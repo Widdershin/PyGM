@@ -1,1 +1,4 @@
-PyGM is a Game Maker style wrapper for PyGame! 
+PyGM
+====
+
+PyGM is a wrapper for PyGame that mimics the functionality that Game Maker provides.
