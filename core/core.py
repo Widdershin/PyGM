@@ -32,7 +32,7 @@ class PyGM(object):
 
 		self.keyState.update()
 
-		for obj in self.objects:
+		for obj in PyGM.objects:
 			obj.update()  # Run the update loop
 
 		self.keyState.endUpdate()
@@ -60,7 +60,8 @@ class PyGMObj(object):
 		self.create()
 		self.x = x
 		self.y = y
-		self.sprite = Sprite(sprite, PyGM.screen)
+		if sprite is not None:
+			self.sprite = Sprite(sprite, PyGM.screen)
 		PyGM.objects.append(self)
 
 	def create(self):
@@ -74,6 +75,6 @@ class PyGMObj(object):
 			self.sprite.draw(self.x, self.y)
 
 	@classmethod
-	def getInstances(cls):
+	def instances(cls):
 		"""Returns a list of all instances of type and children of type"""
 		return [i for i in PyGM.objects if isinstance(i, cls)]

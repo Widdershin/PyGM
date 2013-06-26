@@ -19,5 +19,5 @@ a = Player(5, 5)
 b = Player(10, 5)
 c = Nick(1, 3)
 
-print 'Nick: ' + str(Nick.getInstances())
-print 'Player: ' + str(Player.getInstances())
+print 'Nick: ' + str(Nick.instances())
+print 'Player: ' + str(Player.instances())
