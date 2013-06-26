@@ -1,10 +1,13 @@
+import sys
 import pygame
 from sprite import Sprite
+import input
 
 
 class PyGM(object):
 	"""Main PyGM object, handles creating shit"""
 	objects = []
+	keyState = None
 	screen = None
 
 	def __init__(self, width=640, height=480, fps=60):
@@ -15,16 +18,36 @@ class PyGM(object):
 		self.clock = pygame.time.Clock()
 		pygame.init()
 		PyGM.screen = pygame.display.set_mode((self.width, self.height))
+		PyGM.keyState = input.KeyState()
 
 	def update(self):
+		"""
+		Main update loop for the game engine
+		"""
+		pygame.event.pump()
+
+		for event in pygame.event.get():
+			if event.type == pygame.QUIT:
+				sys.exit()  # Quit the game if the exit button is pressed
+
+		self.keyState.update()
+
 		for obj in self.objects:
-			obj.update()
+			obj.update()  # Run the update loop
+
+		self.keyState.endUpdate()
 
 	def draw(self):
-		PyGM.screen.fill((0, 0, 0))
+		"""
+		Draw loop for the game engine
+		"""
+
+		PyGM.screen.fill((0, 0, 0))  # Clear the screen to black, should add BGCOLOR
+
 		for obj in self.objects:
-			obj.draw()
-		pygame.display.flip()
+			obj.draw()  # Run the draw event of all objects
+
+		pygame.display.flip()  # Print to the screen
 		self.clock.tick(self.fps)
 
 
