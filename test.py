@@ -10,20 +10,19 @@ class Character(core.PyGMObj):
 
 	def update(self):
 		super(Character, self).update()
-		if KeyState.isKeyDown('w'):
+		if KeyState.keyDown('w'):
 			self.y -= 1
-		if KeyState.isKeyDown('s'):
+		if KeyState.keyDown('s'):
 			self.y += 1
-		if KeyState.isKeyDown('d'):
+		if KeyState.keyDown('d'):
 			self.x += 1
-		if KeyState.isKeyDown('a'):
+		if KeyState.keyDown('a'):
 			self.x -= 1
 
 
 def main():
 	game = core.PyGM(width=800, height=600, fps=60)
 	player = Character(x=50, y=50, sprite='Sprites\\Test.png')
-	game.objects.append(player)
 
 	while True:
 		time.sleep(1 / 60 * 1000)
