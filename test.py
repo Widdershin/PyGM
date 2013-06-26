@@ -1,6 +1,6 @@
 import time
 import core
-import core.input
+from core.input import KeyState
 
 
 class Character(core.PyGMObj):
@@ -10,20 +10,18 @@ class Character(core.PyGMObj):
 
 	def update(self):
 		super(Character, self).update()
-		if core.PyGM.keyState.isKeyDown('w'):
+		if KeyState.isKeyDown('w'):
 			self.y -= 1
-		if core.PyGM.keyState.isKeyDown('s'):
+		if KeyState.isKeyDown('s'):
 			self.y += 1
-		if core.PyGM.keyState.isKeyDown('d'):
+		if KeyState.isKeyDown('d'):
 			self.x += 1
-		if core.PyGM.keyState.isKeyDown('a'):
+		if KeyState.isKeyDown('a'):
 			self.x -= 1
-
 
 
 def main():
 	game = core.PyGM(width=800, height=600, fps=60)
-
 	player = Character(x=50, y=50, sprite='Sprites\\Test.png')
 	game.objects.append(player)
 
