@@ -7,7 +7,7 @@ import input
 class PyGM(object):
 	"""Main PyGM object, handles creating shit"""
 	objects = []
-	keyState = None
+	keys = None
 	screen = None
 
 	def __init__(self, width=640, height=480, fps=60):
@@ -18,7 +18,8 @@ class PyGM(object):
 		self.clock = pygame.time.Clock()
 		pygame.init()
 		PyGM.screen = pygame.display.set_mode((self.width, self.height))
-		PyGM.keyState = input.Keys()
+		PyGM.keys = input.Keys()
+		PyGM.mouse = input.Mouse()
 
 	def update(self):
 		"""
@@ -30,12 +31,14 @@ class PyGM(object):
 			if event.type == pygame.QUIT:
 				sys.exit()  # Quit the game if the exit button is pressed
 
-		self.keyState.update()
+		self.keys.update()
+		self.mouse.update()
 
 		for obj in PyGM.objects:
 			obj.update()  # Run the update loop
 
-		self.keyState.endUpdate()
+		self.keys.endUpdate()
+		self.mouse.endUpdate()
 
 	def draw(self):
 		"""

@@ -141,3 +141,17 @@ def createKeys():
 	keys['euro'] = pygame.K_EURO
 
 	return keys
+
+
+def createMB():
+	"""
+	Returns a dict of the mouse buttons
+	"""
+
+	buttons = {}
+
+	buttons['left'] = 0
+	buttons['right'] = 1
+	buttons['middle'] = 2
+
+	return buttons

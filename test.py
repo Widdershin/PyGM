@@ -1,6 +1,6 @@
 import time
 import core
-from core.input import Keys
+from core.input import Keys, Mouse
 
 
 class Character(core.PyGMObj):
@@ -19,10 +19,15 @@ class Character(core.PyGMObj):
 		if Keys.keyDown('a'):
 			self.x -= 1
 
+		self.x = Mouse.position[0]
+		self.y = Mouse.position[1]
+
+		print Mouse.position
+
 
 def main():
 	game = core.PyGM(width=800, height=600, fps=60)
-	player = Character(x=50, y=50, sprite='Sprites\\Test.png')
+	Character(x=50, y=50, sprite='Sprites\\Test.png')
 
 	while True:
 		time.sleep(1 / 60 * 1000)
