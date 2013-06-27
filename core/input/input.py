@@ -5,42 +5,42 @@ import pygame.key
 import core.input.keys
 
 
-class KeyState(object):
+class Keys(object):
 	current = None
 	previous = None
 	keys = {}
 	"""Stores the current and previous state of the keys"""
 	def __init__(self):
-		super(KeyState, self).__init__()
+		super(Keys, self).__init__()
 		self.update()
 		self.endUpdate()
-		KeyState.keys = core.input.keys.createKeys()
+		Keys.keys = core.input.keys.createKeys()
 
 	def update(self):
 		"""
 		Updates the Key State
 		"""
-		KeyState.current = pygame.key.get_pressed()
+		Keys.current = pygame.key.get_pressed()
 
 	def endUpdate(self):
 		"""
 		Sets the previous key state to the current key state, only use at the end
 		"""
-		KeyState.previous = KeyState.current
+		Keys.previous = Keys.current
 
 	@classmethod
 	def keyDown(cls, key):
 		"""
 		Returns whether or not the specified key is currently pressed
 		"""
-		return KeyState.current[KeyState.keys[key]]
+		return Keys.current[Keys.keys[key]]
 
 	@classmethod
 	def keyPressed(cls, key):
 		"""
 		Returns whether a key was pressed in the last update
 		"""
-		if KeyState.current[KeyState.keys[key]] and not KeyState.previous[KeyState.keys[key]]:
+		if Keys.current[Keys.keys[key]] and not Keys.previous[Keys.keys[key]]:
 			return True
 		return False
 
@@ -49,6 +49,6 @@ class KeyState(object):
 		"""
 		Returns whether a key was released in the last update
 		"""
-		if not KeyState.current[KeyState.keys[key]] and KeyState.previous[KeyState.keys[key]]:
+		if not Keys.current[Keys.keys[key]] and Keys.previous[Keys.keys[key]]:
 			return True
 		return False

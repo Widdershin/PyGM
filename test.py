@@ -1,6 +1,6 @@
 import time
 import core
-from core.input import KeyState
+from core.input import Keys
 
 
 class Character(core.PyGMObj):
@@ -10,13 +10,13 @@ class Character(core.PyGMObj):
 
 	def update(self):
 		super(Character, self).update()
-		if KeyState.keyDown('w'):
+		if Keys.keyDown('w'):
 			self.y -= 1
-		if KeyState.keyDown('s'):
+		if Keys.keyDown('s'):
 			self.y += 1
-		if KeyState.keyDown('d'):
+		if Keys.keyDown('d'):
 			self.x += 1
-		if KeyState.keyDown('a'):
+		if Keys.keyDown('a'):
 			self.x -= 1
 
 

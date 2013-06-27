@@ -18,7 +18,7 @@ class PyGM(object):
 		self.clock = pygame.time.Clock()
 		pygame.init()
 		PyGM.screen = pygame.display.set_mode((self.width, self.height))
-		PyGM.keyState = input.KeyState()
+		PyGM.keyState = input.Keys()
 
 	def update(self):
 		"""
