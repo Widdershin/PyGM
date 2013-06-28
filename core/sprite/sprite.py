@@ -13,6 +13,6 @@ class Sprite(pygame.sprite.Sprite):
 		self.add(self.group)
 		self.screen = pygame.display.get_surface()
 
-	def draw(self, x=0, y=0):
+	def draw(self, position):
 		#self.group.draw()
-		self.screen.blit(self.image, (x, y))
+		self.screen.blit(self.image, position.tuple())

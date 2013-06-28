@@ -1,8 +1,8 @@
 import sys
 import pygame
 from sprite import Sprite
+from maths.vector2 import Vector2
 import input
-
 
 class PyGM(object):
 	"""Main PyGM object, handles creating shit"""
@@ -10,14 +10,13 @@ class PyGM(object):
 	keys = None
 	screen = None
 
-	def __init__(self, width=640, height=480, fps=60):
+	def __init__(self, dimensions=Vector2(640, 480), fps=60):
 		super(PyGM, self).__init__()
-		self.width = width
-		self.height = height
+		self.dimensions = dimensions
 		self.fps = fps
 		self.clock = pygame.time.Clock()
 		pygame.init()
-		PyGM.screen = pygame.display.set_mode((self.width, self.height))
+		PyGM.screen = pygame.display.set_mode(dimensions.tuple(asInt=True))
 		PyGM.keys = input.Keys()
 		PyGM.mouse = input.Mouse()
 
@@ -58,11 +57,10 @@ class PyGMObj(object):
 	"""Generic PYGMObj"""
 	instances = []
 
-	def __init__(self, x, y, sprite=None):
+	def __init__(self, position, sprite=None):
 		super(PyGMObj, self).__init__()
 		self.create()
-		self.x = x
-		self.y = y
+		self.position = position
 		if sprite is not None:
 			self.sprite = Sprite(sprite, PyGM.screen)
 		PyGM.objects.append(self)
@@ -75,9 +73,11 @@ class PyGMObj(object):
 
 	def draw(self):
 		if self.sprite is not None:
-			self.sprite.draw(self.x, self.y)
+			self.sprite.draw(self.position)
 
 	@classmethod
 	def instances(cls):
 		"""Returns a list of all instances of type and children of type"""
 		return [i for i in PyGM.objects if isinstance(i, cls)]
+
+

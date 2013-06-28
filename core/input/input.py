@@ -4,6 +4,7 @@ Handles all input
 import pygame.key
 import pygame.mouse
 import core.input.keys
+import core.maths as maths
 
 
 class Keys(object):
@@ -62,7 +63,7 @@ class Mouse(object):
 
 	current = None
 	previous = None
-	position = (0, 0)
+	position = maths.Vector2(0, 0)
 	buttons = {}
 
 	def __init__(self):
@@ -76,7 +77,7 @@ class Mouse(object):
 		Updates the mouse state
 		"""
 		Mouse.current = pygame.mouse.get_pressed()
-		Mouse.position = pygame.mouse.get_pos()
+		Mouse.position.setTuple(pygame.mouse.get_pos())
 
 	def endUpdate(self):
 		"""
