@@ -12,6 +12,7 @@ class Sprite(pygame.sprite.Sprite):
 		self.group = pygame.sprite.Group()
 		self.add(self.group)
 		self.screen = pygame.display.get_surface()
+		self.rect = self.image.get_rect()
 
 	def draw(self, position):
 		#self.group.draw()

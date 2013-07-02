@@ -4,6 +4,7 @@ from sprite import Sprite
 from maths.vector2 import Vector2
 import input
 
+
 class PyGM(object):
 	"""Main PyGM object, handles creating shit"""
 	objects = []
@@ -69,7 +70,8 @@ class PyGMObj(object):
 		pass
 
 	def update(self):
-		pass
+		if self.sprite is not None:
+			self.sprite.rect.move(self.position.tuple())
 
 	def draw(self):
 		if self.sprite is not None:
